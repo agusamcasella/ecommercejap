@@ -1,2 +1,1 @@
-# ecommercejap
- obligatorio de jovenes a programar
+# ecommerce-capacitador

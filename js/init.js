@@ -40,8 +40,33 @@ var getJSONData = function(url){
     });
 }
 
+function chequearsesion(){
+  if(localStorage.getItem("sesion") === null || localStorage.getItem("sesion") === "false"){
+    if(!(location.pathname.endsWith('login.html'))){
+      window.location.href='login.html';
+      localStorage.setItem("sesion",false);
+      alert("Debe iniciar sesion.");
+    }
+  }else{
+    let htmlagregar = `
+      <a id="emailusuario" class="py-2 d-none d-md-inline-block" > (` + localStorage.getItem("email") + `) </a>
+      <button class="btn btn-light" id="salir">Salir</button>
+    `
+    document.getElementById("cabezal").innerHTML += htmlagregar;
+  }
+}
+
+function salir(){
+    localStorage.clear();
+    window.location.href="login.html";
+}
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+  chequearsesion();
+  document.getElementById("salir").addEventListener("click", function(){
+    salir();
 });
+});
+

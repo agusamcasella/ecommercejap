@@ -65,8 +65,9 @@ function salir(){
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
   chequearsesion();
+  if(!(location.pathname.endsWith('login.html'))){
   document.getElementById("salir").addEventListener("click", function(){
     salir();
-});
+});}
 });
 

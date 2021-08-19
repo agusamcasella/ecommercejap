@@ -2,8 +2,8 @@
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-    let boton = document.getElementById('submit');
-    submit.addEventListener('click', function (evento) {
+    let formulario = document.getElementById('formulario');
+    formulario.addEventListener('submit', function (evento) {
         evento.preventDefault();
         let email = document.getElementById('email').value;
         localStorage.setItem('email', email);

@@ -18,7 +18,7 @@ function chequearFormulario() {
         }
 
         return false;
-        
+
     } else {
         return true;
     }
@@ -35,8 +35,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         if (chequearFormulario()) {
             let email = document.getElementById('email').value;
             localStorage.setItem('email', email);
-            localStorage.setItem('sesion', true);
-
+            
             window.location.href = 'index.html';
         }
 

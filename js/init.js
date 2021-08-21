@@ -41,10 +41,9 @@ var getJSONData = function (url) {
 }
 
 function chequearsesion() {
-  if (localStorage.getItem("sesion") === null || localStorage.getItem("sesion") === "false") {
+  if (localStorage.getItem("email") === null) {
     if (!(location.pathname.endsWith('login.html'))) {
       window.location.href = 'login.html';
-      localStorage.setItem("sesion", false);
       alert("Debe iniciar sesion.");
     }
   } else {
@@ -54,7 +53,7 @@ function chequearsesion() {
       <button class="btn btn-light" id="salir">Salir</button>
     `
       document.getElementById("cabezal").innerHTML += htmlagregar;
-    }else{
+    } else {
       alert("Ya hay un usuario logueado.");
       window.location.href = 'index.html';
     }
@@ -69,7 +68,7 @@ function botonsalir() {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-  
+
   chequearsesion();
 
   if (!(location.pathname.endsWith('login.html'))) {

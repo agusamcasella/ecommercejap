@@ -34,3 +34,8 @@ html, body{
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
   }
+  hr{
+    height: 1px;
+    background-color: black;
+    border: none;
+    }

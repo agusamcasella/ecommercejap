@@ -49,7 +49,7 @@ function chequearsesion(){
     }
   }else{
     let htmlagregar = `
-      <a id="emailusuario" class="py-2 d-none d-md-inline-block" > (` + localStorage.getItem("email") + `) </a>
+      <a id="emailusuario" class="py-2 d-none d-md-inline-block" href="#" > (` + localStorage.getItem("email") + `) </a>
       <button class="btn btn-light" id="salir">Salir</button>
     `
     document.getElementById("cabezal").innerHTML += htmlagregar;

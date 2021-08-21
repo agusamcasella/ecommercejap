@@ -61,7 +61,7 @@ function chequearsesion() {
   }
 }
 
-function salir() {
+function botonsalir() {
   localStorage.clear();
   window.location.href = "login.html";
 }
@@ -69,10 +69,12 @@ function salir() {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
+  
   chequearsesion();
+
   if (!(location.pathname.endsWith('login.html'))) {
     document.getElementById("salir").addEventListener("click", function () {
-      salir();
+      botonsalir();
     });
   }
 });

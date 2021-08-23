@@ -3,7 +3,7 @@ function chequearFormulario() {
     let email = document.getElementById('email').value;
     let msjemail = document.getElementById('msjemail');
     let msjpass = document.getElementById('msjpass');
-
+    
     if (email === "" || pass === "") {
         if (email === "") {
             msjemail.innerHTML = "**Campo Vacìo.";

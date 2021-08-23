@@ -43,8 +43,9 @@ var getJSONData = function (url) {
 function chequearsesion() {
   if (localStorage.getItem("email") === null) {
     if (!(location.pathname.endsWith('login.html'))) {
-      window.location.href = 'login.html';
       alert("Debe iniciar sesion.");
+
+      window.location.href = 'login.html';
     }
   } else {
     if (!(location.pathname.endsWith('login.html'))) {

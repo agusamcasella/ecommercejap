@@ -2,7 +2,8 @@ const ORDENAR_POR_NOMBRE = "AZ"
 const ORDENAR_POR_ASC_PRECIO = "PRECIOASC"
 const ORDENAR_POR_DES_PRECIO = "PRECIODES"
 const ORDENAR_POR_DES_RELEVANCIA = "RELEVANCIA"
-
+var minPrecio = undefined;
+var maxPrecio = undefined;
 var productosArray = [];
 
 function convertirMoneda(moneda) {
@@ -50,6 +51,9 @@ function mostrarProductosLista() {
     for (let i = 0; i < productosArray.length; i++) {
         let producto = productosArray[i];
 
+        if (((minPrecio == undefined) || (minPrecio != undefined && parseInt(producto.cost) >= minPrecio)) &&
+        ((maxPrecio == undefined) || (maxPrecio != undefined && parseInt(producto.cost) <= maxPrecio))){
+
         htmlContentToAppend += `
         <a href="#" class="list-group-item list-group-item-action">
             <div class="row">
@@ -68,7 +72,7 @@ function mostrarProductosLista() {
             </div>
         </a>
         `
-
+    }
         document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
     }
 }
@@ -99,5 +103,45 @@ document.addEventListener("DOMContentLoaded", function (e) {
             mostrarProductosListaOrdenada(ORDENAR_POR_NOMBRE, productosArray);
         }
     });
-    
+
+    document.getElementById("ordXRelevancia").addEventListener("click", function () {
+        mostrarProductosListaOrdenada(ORDENAR_POR_DES_RELEVANCIA);
+    });
+    document.getElementById("ordAscPrecio").addEventListener("click", function () {
+        mostrarProductosListaOrdenada(ORDENAR_POR_ASC_PRECIO);
+    });
+    document.getElementById("ordDescPrecio").addEventListener("click", function () {
+        mostrarProductosListaOrdenada(ORDENAR_POR_DES_PRECIO);
+    });
+    document.getElementById("limpiarFiltroPrecio").addEventListener("click", function () {
+        document.getElementById("rangoFiltroPrecioMin").value = "";
+        document.getElementById("rangoFiltroPrecioMax").value = "";
+
+        minPrecio = undefined;
+        maxPrecio = undefined;
+
+        mostrarProductosLista();
+    });
+    document.getElementById("filtroPrecio").addEventListener("click", function () {
+        //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
+        //de productos por categoría.
+        minPrecio = document.getElementById("rangoFiltroPrecioMin").value;
+        maxPrecio = document.getElementById("rangoFiltroPrecioMax").value;
+
+        if ((minPrecio != undefined) && (minPrecio != "") && (parseInt(minPrecio)) >= 0) {
+            minPrecio = parseInt(minPrecio);
+        }
+        else {
+            minPrecio = undefined;
+        }
+
+        if ((maxPrecio != undefined) && (maxPrecio != "") && (parseInt(maxPrecio)) >= 0) {
+            maxPrecio = parseInt(maxPrecio);
+        }
+        else {
+            maxPrecio = undefined;
+        }
+
+        mostrarProductosLista();
+    });
 });

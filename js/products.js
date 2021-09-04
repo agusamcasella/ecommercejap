@@ -5,6 +5,7 @@ const ORDENAR_POR_DES_RELEVANCIA = "RELEVANCIA"
 var minPrecio = undefined;
 var maxPrecio = undefined;
 var productosArray = [];
+var palabra = undefined;
 
 function convertirMoneda(moneda) {
     if (moneda === "USD") {
@@ -44,17 +45,31 @@ function ordenarProductos(criterio, array) {
 
     return result;
 }
+function mostrarXBusqueda(nombre,descripcion){
+    let nombremin = nombre.toLowerCase();
+    let descrmin = descripcion.toLowerCase();
+    if(palabra == undefined || palabra == ""){
+        return true;
+    }else if((nombremin.indexOf(palabra.toLowerCase())!=-1)||(descrmin.indexOf(palabra.toLowerCase())!=-1)){
+        return true;
+    }else{
+        return false;
+    }
 
+}
 function mostrarProductosLista() {
 
     let htmlContentToAppend = "";
     for (let i = 0; i < productosArray.length; i++) {
         let producto = productosArray[i];
-
+        let nombre = producto.name;
+        let descripcion = producto.description;
+        
         if (((minPrecio == undefined) || (minPrecio != undefined && parseInt(producto.cost) >= minPrecio)) &&
-        ((maxPrecio == undefined) || (maxPrecio != undefined && parseInt(producto.cost) <= maxPrecio))){
-
-        htmlContentToAppend += `
+            ((maxPrecio == undefined) || (maxPrecio != undefined && parseInt(producto.cost) <= maxPrecio))) {
+                console.log(mostrarXBusqueda(nombre,descripcion));
+            if (mostrarXBusqueda(nombre,descripcion)) {
+                htmlContentToAppend += `
         <a href="#" class="list-group-item list-group-item-action">
             <div class="row">
                 <div class="col-3">
@@ -72,7 +87,8 @@ function mostrarProductosLista() {
             </div>
         </a>
         `
-    }
+            }
+        }
         document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
     }
 }
@@ -143,5 +159,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
 
         mostrarProductosLista();
+    });
+
+    document.getElementById("busqueda").addEventListener("keyup", function () {
+        palabra = document.getElementById("busqueda").value;
+        mostrarProductosLista();
+
+
+
     });
 });

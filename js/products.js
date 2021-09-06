@@ -45,18 +45,24 @@ function ordenarProductos(criterio, array) {
 
     return result;
 }
+function quitarTildes(str){
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 function mostrarXBusqueda(nombre,descripcion){
-    let nombremin = nombre.toLowerCase();
-    let descrmin = descripcion.toLowerCase();
+    let nombr = nombre.toLowerCase();
+    let descr = descripcion.toLowerCase();
+    nombr = quitarTildes(nombr);
+    descr = quitarTildes(descr);
     if(palabra == undefined || palabra == ""){
         return true;
-    }else if((nombremin.indexOf(palabra.toLowerCase())!=-1)||(descrmin.indexOf(palabra.toLowerCase())!=-1)){
+    }else if((nombr.indexOf(palabra.toLowerCase())!=-1)||(descr.indexOf(palabra.toLowerCase())!=-1)){
         return true;
     }else{
         return false;
     }
 
 }
+
 function mostrarProductosLista() {
 
     let htmlContentToAppend = "";
@@ -67,7 +73,6 @@ function mostrarProductosLista() {
         
         if (((minPrecio == undefined) || (minPrecio != undefined && parseInt(producto.cost) >= minPrecio)) &&
             ((maxPrecio == undefined) || (maxPrecio != undefined && parseInt(producto.cost) <= maxPrecio))) {
-                console.log(mostrarXBusqueda(nombre,descripcion));
             if (mostrarXBusqueda(nombre,descripcion)) {
                 htmlContentToAppend += `
         <a href="#" class="list-group-item list-group-item-action">
@@ -164,8 +169,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById("busqueda").addEventListener("keyup", function () {
         palabra = document.getElementById("busqueda").value;
         mostrarProductosLista();
-
-
-
+    });
+    document.getElementById("busqueda").addEventListener("focusout",function(){
+        palabra = document.getElementById("busqueda").value;
+        if(palabra == ""){
+            mostrarProductosLista();
+        }
     });
 });

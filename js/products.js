@@ -75,7 +75,7 @@ function mostrarProductosLista() {
             ((maxPrecio == undefined) || (maxPrecio != undefined && parseInt(producto.cost) <= maxPrecio))) {
             if (mostrarXBusqueda(nombre,descripcion)) {
                 htmlContentToAppend += `
-        <a href="#" class="list-group-item list-group-item-action">
+        <a href="product-info.html" class="list-group-item list-group-item-action">
             <div class="row">
                 <div class="col-3">
                     <img src="` + producto.imgSrc + `" alt="` + producto.description + `" class="img-thumbnail">

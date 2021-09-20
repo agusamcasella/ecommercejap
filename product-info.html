@@ -13,6 +13,8 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="css/estrellas.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -25,14 +27,87 @@
       <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
     </div>
   </nav>
-  <div class="container p-5">
+  <!-- <div class="container p-5">
     <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
       <h4 class="alert-heading">¡A trabajar! :)</h4>
       <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 19/09/2021) y Entrega 4 (Fecha de entrega: 03/10/2021).</p>
       <hr>
       <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
     </div>
-  </div>
+  </div> -->
+  <main role="main">
+    <div class="container mt-5">
+      <div class="text-center p-4">
+        <h2>Descripción de Producto</h2>
+      </div>
+      <h3 id="nombreProducto"></h3>
+      <hr class="my-3">
+      <dl>
+        <dt>Descripción</dt>
+        <dd>
+          <p id="descripcionProducto"></p>
+        </dd>
+
+        <dt>Precio</dt>
+        <dd>
+          <p id="precioProducto"></p>
+        </dd>
+
+        <dt>Cantidad Vendidos</dt>
+        <dd>
+          <p id="cantProductosVendidos"></p>
+        </dd>
+        <dt>Categoria</dt>
+        <dd>
+          <p id="categoriaProd"></p>
+        </dd>
+        <dt>Imágenes ilustrativas</dt>
+        <dd>
+          <div class="row text-center text-lg-left pt-2" id="productImagesGallery">
+          </div>
+        </dd>
+
+        <hr class="my-3">
+        <dt>Comentarios</dt>
+        <dd>
+          <div id="contenedorComentarios" class="list-group"></div>
+        </dd>
+        <hr class="my-3">
+
+        <dt>Valorar y comentar:</dt>
+        <dd>
+          <form method="GET" id="formulario">
+            <div class="form-group">
+              <p class="clasificacion" id="calificacion">
+
+                <input id="radio1" type="radio" name="estrellas" value="5">
+                <label for="radio1" class="fa fa-star"></label>
+
+                <input id="radio2" type="radio" name="estrellas" value="4">
+                <label for="radio2" class="fa fa-star"></label>
+
+                <input id="radio3" type="radio" name="estrellas" value="3">
+                <label for="radio3" class="fa fa-star"></label>
+
+                <input id="radio4" type="radio" name="estrellas" value="2">
+                <label for="radio4" class="fa fa-star"></label>
+
+                <input id="radio5" type="radio" name="estrellas" value="1">
+                <label for="radio5" class="fa fa-star"></label>
+              </p>
+
+              <div class="col-md flex-col ">
+                <textarea id="textocomentario" class="form-control row"  name="comentario"
+                  placeholder="Escriba su comentario aqui..." rows="7"></textarea>
+              </div>
+            </div>
+            <input type="hidden" id="usuario" name="usuario">
+            <input type="submit" class="btn btn-primary btn-lg" id="botonenviar" value="Enviar">
+          </form>
+        </dd>
+      </dl>      
+    </div>
+  </main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-right">

@@ -27,20 +27,27 @@ function convertirMoneda(moneda) {
     }
 }
 function mostrarImagenes(array) {
-    let htmlagregar = "";
+    let htmlagregarItems = "";
+    let htmlagregarol = "";
 
     for (let i = 0; i < array.length; i++) {
         let imagen = array[i];
-
-        htmlagregar += `
-        <div class="col-lg-3 col-md-4 col-6">
-            <div class="d-block mb-4 h-100">
-                <img class="img-fluid img-thumbnail" src="` + imagen + `" alt="">
-            </div>
+        let active = "";
+        if(i==0){
+            active = "active";
+        }
+        
+        htmlagregarItems += `
+        <div class="carousel-item `+active+`">
+                <img src="`+ imagen +`" class="d-block w-100" alt="...">
         </div>
         `
+        htmlagregarol +=`
+        <li data-target="#productImagesGallery" data-slide-to="`+i+`" class="`+active+`"></li>
+        `
+        document.getElementById("productImagesGalleryol").innerHTML = htmlagregarol;
 
-        document.getElementById("productImagesGallery").innerHTML = htmlagregar;
+        document.getElementById("productImagesGalleryitems").innerHTML = htmlagregarItems;
     }
 };
 

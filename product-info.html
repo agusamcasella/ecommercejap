@@ -62,7 +62,19 @@
         </dd>
         <dt>Imágenes ilustrativas</dt>
         <dd>
-          <div class="row text-center text-lg-left pt-2" id="productImagesGallery">
+          <div id="productImagesGallery" class="carousel slide" data-ride="carousel">
+            <ol id="productImagesGalleryol" class="carousel-indicators">
+            </ol>
+            <div id="productImagesGalleryitems" class="carousel-inner">
+            </div>
+            <a class="carousel-control-prev" href="#productImagesGallery" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#productImagesGallery" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
         </dd>
 
@@ -102,7 +114,7 @@
               </p>
 
               <div class="col-md flex-col ">
-                <textarea id="textocomentario" class="form-control row"  name="comentario"
+                <textarea id="textocomentario" class="form-control row" name="comentario"
                   placeholder="Escriba su comentario aqui..." rows="7"></textarea>
               </div>
             </div>
@@ -110,7 +122,7 @@
             <input type="submit" class="btn btn-primary btn-lg" id="botonenviar" value="Enviar">
           </form>
         </dd>
-      </dl>      
+      </dl>
     </div>
   </main>
   <footer class="text-muted">

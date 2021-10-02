@@ -50,8 +50,18 @@ function chequearsesion() {
   } else {
     if (!(location.pathname.endsWith('login.html'))) {
       let htmlagregar = `
-      <a id="emailusuario" class="py-2 d-none d-md-inline-block" href="#" > (` + localStorage.getItem("email") + `) </a>
-      <button class="btn btn-light" id="salir">Salir</button>
+      <div class="dropdown">
+          <button id="emailusuario" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            `+ localStorage.getItem("email") +`
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="cart.html">Mi Carrito</a>
+            <a class="dropdown-item" href="my-profile.html">Mi Perfil</a>
+            <div class="dropdown-divider"></div>
+            <button id="salir" class="dropdown-item" >Salir</button>
+          </div>
+      </div>
+      
     `
       document.getElementById("cabezal").innerHTML += htmlagregar;
     } else {

@@ -116,6 +116,47 @@ function agregarNuevoComentario(usuario, puntaje, mensaje) {
         document.getElementById("contenedorComentarios").innerHTML = htmlagregar + htmlviejo;
     }
 }
+
+function mostrarProductosRel() {
+    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            productosRel = resultObj.data;
+            console.log(productosRel);
+            console.log(producto.relatedProducts);
+            let htmlProdRelacionado = "";
+            for (const productorelacionado of producto.relatedProducts) {
+                let infoRelacionado = productosRel[productorelacionado];
+                let nombre = infoRelacionado.name;
+                let imagensrc = infoRelacionado.imgSrc;
+                let precio = convertirMoneda(infoRelacionado.currency) + " " + infoRelacionado.cost;
+
+
+                htmlProdRelacionado += `
+                <div class="col-lg-3 col-md-2 col-3">
+                
+                    <figure class="figure">
+                        <a href="product-info.html">
+                            <img src=`+ imagensrc +` class="figure-img img-fluid rounded">
+                            <figcaption class="figure-caption">`+ nombre + ` - ` + precio +`</figcaption>
+                        </a>
+                    </figure>
+                  
+                </div>
+                `
+
+
+                document.getElementById("contenedorProdRelacionado").innerHTML = htmlProdRelacionado;
+            }
+            
+            
+            
+
+        }
+    });
+
+
+
+}
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -137,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             precioProducto.innerHTML = convertirMoneda(producto.currency) + " " + producto.cost;
             cantidadVendidos.innerHTML = producto.soldCount;
             categoriaProd.innerHTML = producto.category;
-
+            
             //Muestro las imagenes en forma de galería
             mostrarImagenes(producto.images);
 
@@ -158,8 +199,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 }
             });
 
+            //Muesro productos relacionados
+            mostrarProductosRel();
 
         }
     });
+
+
 
 });

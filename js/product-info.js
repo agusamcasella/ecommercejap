@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         if (resultObj.status === "ok") {
             producto = resultObj.data;
-
+            console.log(producto);
             let nombreProducto = document.getElementById("nombreProducto");
             let descripcionProducto = document.getElementById("descripcionProducto");
             let precioProducto = document.getElementById("precioProducto");

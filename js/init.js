@@ -55,10 +55,10 @@ function chequearsesion() {
             `+ localStorage.getItem("email") +`
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="cart.html">Mi Carrito</a>
-            <a class="dropdown-item" href="my-profile.html">Mi Perfil</a>
+            <a class="dropdown-item" href="cart.html">Mi Carrito <i class="fas fa-shopping-cart"></i></a>
+            <a class="dropdown-item" href="my-profile.html">Mi Perfil  <i class="fas fa-user-circle"></i></a>
             <div class="dropdown-divider"></div>
-            <button id="salir" class="dropdown-item" >Salir</button>
+            <button id="salir" class="dropdown-item" >Salir  <i class="fas fa-sign-out-alt"></i></button>
           </div>
       </div>
       

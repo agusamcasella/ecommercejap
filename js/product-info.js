@@ -128,8 +128,7 @@ function mostrarProductosRel() {
     getJSONData(PRODUCTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
             productosRel = resultObj.data;
-            console.log(productosRel);
-            console.log(producto.relatedProducts);
+            
             let htmlProdRelacionado = "";
             for (const productorelacionado of producto.relatedProducts) {
                 let infoRelacionado = productosRel[productorelacionado];
@@ -173,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         if (resultObj.status === "ok") {
             producto = resultObj.data;
-            console.log(producto);
+           
             let nombreProducto = document.getElementById("nombreProducto");
             let descripcionProducto = document.getElementById("descripcionProducto");
             let precioProducto = document.getElementById("precioProducto");

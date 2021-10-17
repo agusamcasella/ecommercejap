@@ -25,7 +25,7 @@ function rellenarTabla() {
                 <td>`+ nombre + `</td>
                 <td>`+ convertirMoneda(articulo.currency) + ` ` + costo + `</td>
                 <td><input  name="cantidadA" min="0" type="number" style="width:60px" value="` + cantidad + `"></td>
-                <td ><p style="width:100%" text-align="right">` + convertirMoneda(articulo.currency) + ` <input id=` + i + ` type="number"  disabled value="` + subtotal + `"><p></td>
+                <td ><p style="width:100%" text-align="right">` + convertirMoneda(articulo.currency) + ` <span id=` + i + `> ` + subtotal.toFixed(2) + `</span><p></td>
             </tr>
              `;
         i++
@@ -37,7 +37,7 @@ function rellenarTabla() {
 
 function calcularSubtotalTabla(id, cantidad) {
     let sub = parseInt(cantidad) * parseInt(articulos[id].unitCost);
-    document.getElementById(`${id}`).value = sub;
+    document.getElementById(`${id}`).innerHTML = sub.toFixed(2);
 }
 
 
@@ -46,13 +46,13 @@ function calcularSubtotalForm() {
     for (let i = 0; i < articulos.length; i++) {
         let asumar = 0;
         if (articulos[i].currency === "UYU") {
-            asumar = parseInt(document.getElementById(`${i}`).value);
+            asumar = parseInt(document.getElementById(`${i}`).innerHTML);
         } else if (articulos[i].currency === "USD") {
-            asumar = parseInt(document.getElementById(`${i}`).value * 40);
+            asumar = (parseInt(document.getElementById(`${i}`).innerHTML) * 40);
         }
         subform += parseInt(asumar);
     }
-    document.getElementById("subtotalform").innerHTML = subform;
+    document.getElementById("subtotalform").innerHTML = subform.toFixed(2);
 }
 
 
@@ -62,10 +62,8 @@ function calcularTotalyEnvio() {
     let subtotalform = parseInt(document.getElementById("subtotalform").innerHTML);
     envio = (subtotalform * (porcentajeenvio / 100));
     total = parseInt(subtotalform) + parseInt(envio);
-    console.log(total);
-    console.log(envio);
-    document.getElementById("costoenvioform").innerHTML = envio;
-    document.getElementById("totalform").innerHTML = total;
+    document.getElementById("costoenvioform").innerHTML = envio.toFixed(2);
+    document.getElementById("totalform").innerHTML = total.toFixed(2);
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de

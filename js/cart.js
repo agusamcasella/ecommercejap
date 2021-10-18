@@ -170,7 +170,16 @@ function validarTarjeta() {
     }
     return valido;
 }
-
+function validarTotal(){
+    let valido = false;
+    valido = (document.getElementById("totalform").innerHTML !== "0.00");
+    if (!valido) {
+        document.getElementById("errorTotal").innerHTML = "Debe comprar 1 item por lo menos.";
+    } else {
+        document.getElementById("errorTotal").innerHTML = "";
+    }
+    return valido;
+}
 function validarCamposFormulario() {
     let validocalle = false;
     let validonumero = false;
@@ -196,12 +205,7 @@ function validarCamposFormulario() {
         validoesquina = true;
     }
     formapagoval = validarFormapago();
-    validarcantTotal = (document.getElementById("totalform").innerHTML !== "0.00")
-    if (!validarcantTotal) {
-        document.getElementById("errorTotal").innerHTML = "Debe comprar 1 item por lo menos.";
-    } else {
-        document.getElementById("errorTotal").innerHTML = "";
-    }
+    validarcantTotal = validarTotal();
 
     return (validocalle * validoesquina * validonumero * formapagoval * validarcantTotal);
 }
@@ -238,6 +242,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     calcularSubtotalTabla(i, cant.value);
                     calcularSubtotalForm();
                     calcularTotalyEnvio();
+                    validarTotal();
                 })
             }
         }

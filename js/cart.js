@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     for (let i = 0; i < radiodepagos.length; i++) {
         radiodepagos[i].addEventListener("click", function (e) {
             rellenarModal(radiodepagos[i].value);
-            validarFormapago()
+           
         });
     }
     document.getElementById("close").addEventListener("click", function (e) {

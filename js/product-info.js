@@ -57,7 +57,7 @@ function mostrarComentariosProducto() {
 
     let htmlagregar = "";
 
-    for (const comentario of productoCommentarios) {
+    for (let comentario of productoCommentarios) {
         let htmlestrellas = "";
         for (let i = 0; i < comentario.score; i++) {
             htmlestrellas += `<span class="fa fa-star checked"></span>`;
@@ -130,7 +130,7 @@ function mostrarProductosRel() {
             productosRel = resultObj.data;
             
             let htmlProdRelacionado = "";
-            for (const productorelacionado of producto.relatedProducts) {
+            for (let productorelacionado of producto.relatedProducts) {
                 let infoRelacionado = productosRel[productorelacionado];
                 let nombre = infoRelacionado.name;
                 let imagensrc = infoRelacionado.imgSrc;

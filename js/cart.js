@@ -66,10 +66,150 @@ function calcularTotalyEnvio() {
     document.getElementById("totalform").innerHTML = total.toFixed(2);
 }
 
+function agregarDetalleEnvio() {
+    let detalle = "";
+    if (porcentajeenvio == 5) {
+        detalle = " - Standard";
+    } else if (porcentajeenvio == 7) {
+        detalle = " - Express";
+    } else if (porcentajeenvio == 15) {
+        detalle = " - Premium";
+    }
+    document.getElementById("tipoenvioform").innerHTML = detalle;
+}
+
+function rellenarModal(id) {
+
+    if ("formapago1" === id) {
+        document.getElementById("numerotarjeta").disabled = false;
+        document.getElementById("codigotarjeta").disabled = false;
+        document.getElementById("fechavencimiento").disabled = false;
+        document.getElementById("numerocuenta").disabled = true;
+        document.getElementById("numerocuenta").value = "";
+        document.getElementById("errorNumCuenta").innerHTML = "";
+
+        document.getElementById("formaPago").innerHTML = "Tarjeta de crèdito";
+
+    } else if ("formapago2" === id) {
+        document.getElementById("numerotarjeta").disabled = true;
+        document.getElementById("codigotarjeta").disabled = true;
+        document.getElementById("fechavencimiento").disabled = true;
+        document.getElementById("numerotarjeta").value = "";
+        document.getElementById("codigotarjeta").value = "";
+        document.getElementById("fechavencimiento").value = "";
+        document.getElementById("errorNumeroTarjeta").innerHTML = "";
+        document.getElementById("errorCodigoTarjeta").innerHTML = "";
+        document.getElementById("errorFecha").innerHTML = "";
+
+        document.getElementById("numerocuenta").disabled = false;
+        document.getElementById("formaPago").innerHTML = "Transferencia bancaria";
+    }
+}
+function validarFormapago() {
+
+    let valido = false;
+    if (document.getElementById("formaPago").innerHTML === "No se ha seleccionado.") {
+        document.getElementById("errorFormapago").innerHTML = "Debe seleccionar una forma de pago.";
+        valido = false;
+    } else {
+        document.getElementById("errorFormapago").innerHTML = "";
+        if (document.getElementById("formaPago").innerHTML === "Tarjeta de crèdito") {
+            valido = validarTarjeta();
+        } else if (document.getElementById("formaPago").innerHTML === "Transferencia bancaria") {
+            valido = validarBancaria();
+        }
+    }
+    return valido;
+}
+function validarBancaria() {
+    let valido = false;
+    if (document.getElementById("numerocuenta").value === "") {
+        document.getElementById("errorNumCuenta").innerHTML = "Obligatorio.";
+        document.getElementById("errorFormaDePagos").innerHTML = "Faltan Datos.";
+        valido = false;
+
+    } else {
+        document.getElementById("errorNumCuenta").innerHTML = "";
+        document.getElementById("errorFormaDePagos").innerHTML = "";
+
+        valido = true;
+    }
+    return valido;
+}
+function validarTarjeta() {
+    let valido = false;
+    if (document.getElementById("numerotarjeta").value === "") {
+        document.getElementById("errorNumeroTarjeta").innerHTML = "Obligatorio.";
+        document.getElementById("errorFormaDePagos").innerHTML = "Faltan Datos.";
+        valido = false;
+    } else {
+        document.getElementById("errorNumeroTarjeta").innerHTML = "";
+        document.getElementById("errorFormaDePagos").innerHTML = "";
+
+        valido = true;
+    }
+    if (document.getElementById("codigotarjeta").value === "") {
+        document.getElementById("errorCodigoTarjeta").innerHTML = "Obligatorio.";
+        document.getElementById("errorFormaDePagos").innerHTML = "Faltan Datos.";
+        valido = false;
+    } else {
+        document.getElementById("errorCodigoTarjeta").innerHTML = "";
+        document.getElementById("errorFormaDePagos").innerHTML = "";
+
+        valido = true;
+    }
+    if (document.getElementById("fechavencimiento").value === "") {
+        document.getElementById("errorFecha").innerHTML = "Obligatorio.";
+        document.getElementById("errorFormaDePagos").innerHTML = "Faltan Datos.";
+        valido = false;
+    } else {
+        document.getElementById("errorFecha").innerHTML = "";
+        document.getElementById("errorFormaDePagos").innerHTML = "";
+
+        valido = true;
+    }
+    return valido;
+}
+
+function validarCamposFormulario() {
+    let validocalle = false;
+    let validonumero = false;
+    let validoesquina = false;
+    let formapagoval = false;
+    let validarcantTotal = false;
+    if (document.getElementById("calle").value === "") {
+        document.getElementById("errorCalle").innerHTML = "Obligatorio.";
+    } else {
+        document.getElementById("errorCalle").innerHTML = "";
+        validocalle = true;
+    }
+    if (document.getElementById("numero").value === "") {
+        document.getElementById("errorNumero").innerHTML = "Obligatorio.";
+    } else {
+        document.getElementById("errorNumero").innerHTML = "";
+        validonumero = true;
+    }
+    if (document.getElementById("esquina").value === "") {
+        document.getElementById("errorEsquina").innerHTML = "Obligatorio.";
+    } else {
+        document.getElementById("errorEsquina").innerHTML = "";
+        validoesquina = true;
+    }
+    formapagoval = validarFormapago();
+    validarcantTotal = (document.getElementById("totalform").innerHTML !== "0.00")
+    if (!validarcantTotal) {
+        document.getElementById("errorTotal").innerHTML = "Debe comprar 1 item por lo menos.";
+    } else {
+        document.getElementById("errorTotal").innerHTML = "";
+    }
+
+    return (validocalle * validoesquina * validonumero * formapagoval * validarcantTotal);
+}
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
+
     getJSONData(CART_DESAFIATE_URL).then(function (resultObj) {
 
         if (resultObj.status === "ok") {
@@ -77,23 +217,16 @@ document.addEventListener("DOMContentLoaded", function (e) {
             rellenarTabla();
             calcularSubtotalForm();
             calcularTotalyEnvio();
+
             let tiposenvioradios = document.getElementsByName("tipoenvio");
-            let tipoenvioform = document.getElementById("tipoenvioform");
+
 
             for (let i = 0; i < tiposenvioradios.length; i++) {
                 let tipoenvio = tiposenvioradios[i];
                 tipoenvio.addEventListener("click", function (e) {
                     porcentajeenvio = tipoenvio.value;
 
-                    let detalle = "";
-                    if (porcentajeenvio == 5) {
-                        detalle = " - Standard";
-                    } else if (porcentajeenvio == 7) {
-                        detalle = " - Express";
-                    } else if (porcentajeenvio == 15) {
-                        detalle = " - Premium";
-                    }
-                    tipoenvioform.innerHTML = detalle;
+                    agregarDetalleEnvio();
                     calcularTotalyEnvio();
                 })
             }
@@ -109,6 +242,26 @@ document.addEventListener("DOMContentLoaded", function (e) {
             }
         }
     });
+    document.getElementById("numerotarjeta").disabled = true;
+    document.getElementById("codigotarjeta").disabled = true;
+    document.getElementById("fechavencimiento").disabled = true;
 
-
+    document.getElementById("numerocuenta").disabled = true;
+    let radiodepagos = document.getElementsByName("formapagomodal");
+    for (let i = 0; i < radiodepagos.length; i++) {
+        radiodepagos[i].addEventListener("click", function (e) {
+            rellenarModal(radiodepagos[i].value);
+            validarFormapago()
+        });
+    }
+    document.getElementById("close").addEventListener("click", function (e) {
+        validarFormapago();
+    })
+    document.getElementById("formulario").addEventListener("submit", function (e) {
+        e.preventDefault();
+        let val = validarCamposFormulario();
+        if (val) {
+            window.location.href = "index.html";
+        }
+    })
 });

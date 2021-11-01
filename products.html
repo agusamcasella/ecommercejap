@@ -16,6 +16,7 @@
 </head>
 
 <body>
+
   <nav class="site-header sticky-top py-1 bg-dark">
     <div id="cabezal" class="container d-flex flex-column flex-md-row justify-content-between">
       <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
@@ -31,7 +32,7 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col text-right">
+        <div class="col-sm text-right">
           <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
             <label class="btn btn-light" id="ordDescPrecio">
               <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>$$->$
@@ -48,15 +49,15 @@
         </div>
       </div>
       <div class="row justify-content-end">
-        <div class="col-md-6">
+        <div class="col-sm">
           <div class="col text-left">
             <label class="btn btn-light" for="busqueda">Buscar: </label>
             <input type="search" id="busqueda" placeholder="Busqueda de productos...">
           </div>
         </div>
-        <div class="col-md-6 col-sm-12 mb-1 container">
-          <div class="row container p-0 m-0">
-            <div class="col">
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col text-left">
               <p class="font-weight-normal text-right my-2">Precio</p>
             </div>
             <div class="col">
@@ -65,7 +66,7 @@
             <div class="col">
               <input class="form-control" type="number" placeholder="máx." id="rangoFiltroPrecioMax">
             </div>
-            <div class="col-3 p-0">
+            <div class="col-sm">
               <div class="btn-group" role="group">
                 <button class="btn btn-light btn-block" id="filtroPrecio">Filtrar</button>
                 <button class="btn btn-light btn-sm" id="limpiarFiltroPrecio">Limpiar</button>
@@ -74,10 +75,10 @@
           </div>
         </div>
       </div>
-      <div class="container">
-        <div class="row" id="prod-list-container">
-        </div>
+      
+      <div class="row" style="row-gap: 10px;" id="prod-list-container">
       </div>
+
     </div>
   </main>
   <footer class="text-muted bg-light">

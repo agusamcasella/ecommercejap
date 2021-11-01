@@ -72,7 +72,7 @@ function chequearsesion() {
 }
 
 function botonsalir() {
-  localStorage.clear();
+  localStorage.removeItem("email");
   window.location.href = "login.html";
 }
 //Función que se ejecuta una vez que se haya lanzado el evento de

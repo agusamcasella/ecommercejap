@@ -75,20 +75,22 @@ function mostrarProductosLista() {
             ((maxPrecio == undefined) || (maxPrecio != undefined && parseInt(producto.cost) <= maxPrecio))) {
             if (mostrarXBusqueda(nombre,descripcion)) {
                 htmlContentToAppend += `
-        <a href="product-info.html" class="col-md-4">
-            <div class="row">
-                    <img width="100%" src="` + producto.imgSrc + `" alt="` + producto.description + `" class="img-thumbnail">
-                <div class="col">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4 class="mb-1">`+ producto.name + `</h4>
+        
+            <div class="card col-md-4 shadow-sm">
+                <img width="100%" src="` + producto.imgSrc + `" alt="` + producto.description + `>
+                <div class="card-body">
+                    <p class="card-text">
+                    <a href="product-info.html"><h4 class="mb-1">`+ producto.name + `</h4></a>
                         <small class="text-muted">` + convertirMoneda(producto.currency) + ` ` + producto.cost + ` </small>
+                    </p>
+                    <p class="card-text">` + producto.description + `</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">` + producto.soldCount + ` vendidos </small>
+
                     </div>
-                    <p class="mb-1">` + producto.description + `</p>
-                    
-                    <small class="text-muted">` + producto.soldCount + ` vendidos </small>
                 </div>
             </div>
-        </a>
+        
         `
             }
         }

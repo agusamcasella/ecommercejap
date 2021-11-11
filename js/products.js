@@ -76,7 +76,7 @@ function mostrarProductosLista() {
             if (mostrarXBusqueda(nombre,descripcion)) {
                 htmlContentToAppend += `
         
-            <div class="card col-md-4 shadow-sm">
+            <div class="card col-md-4 col-sm-6 shadow-sm">
                 <img width="100%" src="` + producto.imgSrc + `" alt="` + producto.description + `>
                 <div class="card-body">
                     <p class="card-text">

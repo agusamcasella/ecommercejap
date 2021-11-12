@@ -8,6 +8,10 @@ function convertirMoneda(moneda) {
     }
 }
 
+function quitarElemento(id){
+    articulos.splice(id,1);
+}
+
 function rellenarTabla() {
 
     let htmlParaTabla = "";
@@ -26,6 +30,8 @@ function rellenarTabla() {
                 <td>`+ convertirMoneda(articulo.currency) + ` ` + costo + `</td>
                 <td><input  name="cantidadA" min="0" type="number" style="width:60px" value="` + cantidad + `"></td>
                 <td ><p style="width:100%" text-align="right">` + convertirMoneda(articulo.currency) + ` <span id=` + i + `> ` + subtotal.toFixed(2) + `</span><p></td>
+                <td><input type="button" id="quitar${i}" name="botonesdequitar" value="x"></td>
+
             </tr>
              `;
         i++
@@ -218,6 +224,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         if (resultObj.status === "ok") {
             articulos = resultObj.data.articles;
+            console.log(articulos);
             rellenarTabla();
             calcularSubtotalForm();
             calcularTotalyEnvio();
@@ -246,6 +253,17 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 })
             }
         }
+        let botones = document.getElementsByName("botonesdequitar");
+        console.log(botones) ; 
+        for (let i = 0;i<botones.length;i++) {
+                let iter = botones[i];
+                console.log(iter);
+                iter[i].addEventListener("click",function(e){
+                    quitarElemento(i)
+                    rellenarTabla();
+                })
+                i++;
+            }
     });
     document.getElementById("numerotarjeta").disabled = true;
     document.getElementById("codigotarjeta").disabled = true;
@@ -263,10 +281,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
         validarFormapago();
     })
     document.getElementById("formulario").addEventListener("submit", function (e) {
-        e.preventDefault();
+        //e.preventDefault();
         let val = validarCamposFormulario();
-        if (val) {
-            window.location.href = "index.html";
+        if(!val){
+            e.preventDefault();
         }
+        
     })
 });

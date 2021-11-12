@@ -44,6 +44,8 @@
                 <th scope="col">Costo</th>
                 <th scope="col">Cantidad</th>
                 <th scope="col">Subtotal</th>
+                <th scope="col"></th>
+
               </tr>
             </thead>
             <tbody id=contenedorArticulos>
@@ -53,7 +55,7 @@
           <hr>
         </div>
       </div>
-      <form action="" method="POST" id="formulario">
+      <form action="" method="GET" id="formulario">
         <h3>Tipo de envìo</h3>
         <div class="form-group">
           <div class="form-check">
@@ -82,7 +84,7 @@
               <label for="numero">Nùmero:</label>
               <span id="errorNumero" style="color: red;"> </span>
 
-              <input type="number" id="numero" min="1" class="form-control">
+              <input type="number" id="numero" name="numcalle" min="1" class="form-control">
             </div>
           </div>
           <div class="form-row">

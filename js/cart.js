@@ -8,8 +8,18 @@ function convertirMoneda(moneda) {
     }
 }
 
-function quitarElemento(id){
-    articulos.splice(id,1);
+function quitarElemento(id) {
+    articulos.splice(id, 1);
+}
+
+function quitarElementosTablaEscucha() {
+    let botones = document.getElementsByName("botonesdequitar");
+    for (let i = 0; i < botones.length; i++) {
+        botones[i].addEventListener("click", function (e) {
+            quitarElemento(i)
+            rellenarTabla();
+        })
+    }
 }
 
 function rellenarTabla() {
@@ -37,6 +47,26 @@ function rellenarTabla() {
         i++
     }
     document.getElementById("contenedorArticulos").innerHTML = htmlParaTabla;
+
+    quitarElementosTablaEscucha();
+    calcularSubtotalForm();
+    calcularTotalyEnvio();
+    //escucha inputs de cantidades para la tabla
+    let cantidadesinput = document.getElementsByName("cantidadA");
+    for (let i = 0; i < cantidadesinput.length; i++) {
+        let cant = cantidadesinput[i];
+        cant.addEventListener("change", function (e) {
+            if (cant.value === "") {
+                cant.value = 0;
+            }
+            calcularSubtotalTabla(i, cant.value);
+            calcularSubtotalForm();
+            calcularTotalyEnvio();
+            validarTotal();
+
+        })
+
+    }
 
 }
 
@@ -176,7 +206,7 @@ function validarTarjeta() {
     }
     return valido;
 }
-function validarTotal(){
+function validarTotal() {
     let valido = false;
     valido = (document.getElementById("totalform").innerHTML !== "0.00");
     if (!valido) {
@@ -242,28 +272,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 })
             }
 
-            let cantidadesinput = document.getElementsByName("cantidadA");
-            for (let i = 0; i < cantidadesinput.length; i++) {
-                let cant = cantidadesinput[i];
-                cant.addEventListener("change", function (e) {
-                    calcularSubtotalTabla(i, cant.value);
-                    calcularSubtotalForm();
-                    calcularTotalyEnvio();
-                    validarTotal();
-                })
-            }
+
         }
-        let botones = document.getElementsByName("botonesdequitar");
-        console.log(botones) ; 
-        for (let i = 0;i<botones.length;i++) {
-                let iter = botones[i];
-                console.log(iter);
-                iter[i].addEventListener("click",function(e){
-                    quitarElemento(i)
-                    rellenarTabla();
-                })
-                i++;
-            }
     });
     document.getElementById("numerotarjeta").disabled = true;
     document.getElementById("codigotarjeta").disabled = true;
@@ -274,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     for (let i = 0; i < radiodepagos.length; i++) {
         radiodepagos[i].addEventListener("click", function (e) {
             rellenarModal(radiodepagos[i].value);
-           
+
         });
     }
     document.getElementById("close").addEventListener("click", function (e) {
@@ -283,9 +293,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById("formulario").addEventListener("submit", function (e) {
         //e.preventDefault();
         let val = validarCamposFormulario();
-        if(!val){
+        if (!val) {
             e.preventDefault();
         }
-        
+
     })
 });

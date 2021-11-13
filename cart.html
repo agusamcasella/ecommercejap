@@ -138,43 +138,50 @@
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                  <div class="row">
+                  <div class="form-group col-md-6">
                     <label for="formapago1">Tarjeta de crèdito</label>
                     <input type="radio" name="formapagomodal" id="formapago1" value="formapago1">
                   </div>
-                  <div class="row">
-                    <label for="numerotarjeta">Nùmero de tarjeta</label>
-                    <span id="errorNumeroTarjeta" style="color: red;"> </span>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="numerotarjeta">Nùmero de tarjeta</label>
+                      <span id="errorNumeroTarjeta" style="color: red;"> </span>
 
-                    <input type="number" id="numerotarjeta">
+                      <input type="number" class="form-control" id="numerotarjeta">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="codigotarjeta">Còdigo de seg.</label>
+                      <span id="errorCodigoTarjeta" style="color: red;"> </span>
+
+                      <input type="number" class="form-control" max="999" min=0 id="codigotarjeta">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="fechavencimiento">Vencimiento:</label>
+                      <span id="errorFecha" style="color: red;"> </span>
+
+                      <input type="date" class="form-control" id="fechavencimiento">
+                    </div>
                   </div>
-                  <div class="row">
-                    <label for="codigotarjeta">Còdigo de seg.</label>
-                    <span id="errorCodigoTarjeta" style="color: red;"> </span>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="formapago2">Transferencia bancaria</label>
+                      <input type="radio" name="formapagomodal" id="formapago2" value="formapago2">
+                    </div>
+                    <div class="form-group col-md-6">
 
-                    <input type="number" max="999" min=0 id="codigotarjeta">
+                      <br>
+                      <label for="numerocuenta">Nùmero de cuenta</label>
+                      <span id="errorNumCuenta" style="color: red;"> </span>
+                      <input type="number" class="form-control" id="numerocuenta">
+
+                    </div>
                   </div>
-                  <div class="row">
-                    <label for="fechavencimiento">Vencimiento:</label>
-                    <span id="errorFecha" style="color: red;"> </span>
-
-                    <input type="date" id="fechavencimiento">
-                  </div>
-                  <div class="row">
-                    <label for="formapago2">Transferencia bancaria</label>
-                    <input type="radio" name="formapagomodal" id="formapago2" value="formapago2">
-                  </div>
-                  <div class="row">
-                    <label for="numerocuenta">Nùmero de cuenta</label>
-                    <span id="errorNumCuenta" style="color: red;"> </span>
-
-                    <input type="number" id="numerocuenta">
 
 
-                  </div>
+
                 </div>
                 <div class="modal-footer">
-                  <a href="#" data-dismiss="modal" class="btn" id="close">Listo</a>
+                  <a href="#" data-dismiss="modal" class="btn btn-primary" id="close">Listo</a>
                 </div>
               </div>
             </div>

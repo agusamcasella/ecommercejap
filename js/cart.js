@@ -9,26 +9,26 @@ function convertirMoneda(moneda) {
     }
 }
 
-function mensajePostCompra(status) {
-    let htmlMensaje = "";
-    if (status) {
-        // mensajeexito
-        htmlMensaje = `
-        <div class="alert alert-success" role="alert">
-            ${mensajeExito}
-        </div>
-        `
-    } else {
-        // fail
-        htmlMensaje = `
-        <div class="alert alert-danger" role="alert">
-            Su compra no se ha podido concretar!
-            Vuelva a intentarlo màs tarde :)
-        </div>
-        `
-    }
-    document.getElementById("mensajeCompra").innerHTML = htmlMensaje;
-}
+// function mensajePostCompra(status) {
+//     let htmlMensaje = "";
+//     if (status) {
+//         // mensajeexito
+//         htmlMensaje = `
+//         <div class="alert alert-success" role="alert">
+//             ${mensajeExito}
+//         </div>
+//         `
+//     } else {
+//         // fail
+//         htmlMensaje = `
+//         <div class="alert alert-danger" role="alert">
+//             Su compra no se ha podido concretar!
+//             Vuelva a intentarlo màs tarde :)
+//         </div>
+//         `
+//     }
+//     document.getElementById("mensajeCompra").innerHTML = htmlMensaje;
+// }
 
 function quitarElemento(id) {
     articulos.splice(id, 1);
@@ -321,8 +321,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
             e.preventDefault();
         }
     })
-   
-        mensajePostCompra(true);
-        $('#modalchico').modal('show');
+      
     
 });

@@ -78,7 +78,7 @@
               <label for="calle">Calle: </label>
               <span id="errorCalle" style="color: red;"> </span>
 
-              <input type="text" class="form-control" id="calle">
+              <input type="text" class="form-control" name="calle" id="calle">
             </div>
             <div class="form-group col-md-4">
               <label for="numero">Nùmero:</label>
@@ -92,7 +92,7 @@
               <label for="esquina">Esquina: </label>
               <span id="errorEsquina" style="color: red;"> </span>
 
-              <input type="text" class="form-control" id="esquina" placeholder="esq.">
+              <input type="text" class="form-control" name="esquina" id="esquina" placeholder="esq.">
             </div>
           </div>
         </div>
@@ -118,6 +118,7 @@
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">Total de Compra($)</h5>
                 <p id="totalform"></p>
+                <input type="hidden" id="hiddentotal" name="total" form="formulario" value="0">
               </div>
             </div>
           </div>
@@ -140,7 +141,7 @@
                 <div class="modal-body">
                   <div class="form-group col-md-6">
                     <label for="formapago1">Tarjeta de crèdito</label>
-                    <input type="radio" name="formapagomodal" id="formapago1" value="formapago1">
+                    <input type="radio" name="formapagoelegida" id="formapago1" value="tarjeta">
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
@@ -165,7 +166,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="formapago2">Transferencia bancaria</label>
-                      <input type="radio" name="formapagomodal" id="formapago2" value="formapago2">
+                      <input type="radio" name="formapagoelegida" id="formapago2" value="transBancaria">
                     </div>
                     <div class="form-group col-md-6">
 
@@ -192,7 +193,26 @@
 
       </form>
 
-
+      <!-- Small modal -->
+      <div id="modalchico" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header ">
+              <h5 class="modal-title">Estado de compra</h5>
+              <br>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div id="mensajeCompra">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 

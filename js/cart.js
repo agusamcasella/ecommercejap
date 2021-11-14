@@ -1,11 +1,33 @@
 let articulos = {};
 let porcentajeenvio = 5;
+let mensajeExito = "1";
 function convertirMoneda(moneda) {
     if (moneda === "USD") {
         return "U$S";
     } else if (moneda === "UYU") {
         return "$";
     }
+}
+
+function mensajePostCompra(status) {
+    let htmlMensaje = "";
+    if (status) {
+        // mensajeexito
+        htmlMensaje = `
+        <div class="alert alert-success" role="alert">
+            ${mensajeExito}
+        </div>
+        `
+    } else {
+        // fail
+        htmlMensaje = `
+        <div class="alert alert-danger" role="alert">
+            Su compra no se ha podido concretar!
+            Vuelva a intentarlo màs tarde :)
+        </div>
+        `
+    }
+    document.getElementById("mensajeCompra").innerHTML = htmlMensaje;
 }
 
 function quitarElemento(id) {
@@ -59,6 +81,7 @@ function rellenarTabla() {
             if (cant.value === "") {
                 cant.value = 0;
             }
+            articulos[i].count = cant.value;
             calcularSubtotalTabla(i, cant.value);
             calcularSubtotalForm();
             calcularTotalyEnvio();
@@ -100,6 +123,7 @@ function calcularTotalyEnvio() {
     total = parseInt(subtotalform) + parseInt(envio);
     document.getElementById("costoenvioform").innerHTML = envio.toFixed(2);
     document.getElementById("totalform").innerHTML = total.toFixed(2);
+    document.getElementById("hiddentotal").value = total.toFixed(2);
 }
 
 function agregarDetalleEnvio() {
@@ -116,7 +140,7 @@ function agregarDetalleEnvio() {
 
 function rellenarModal(id) {
 
-    if ("formapago1" === id) {
+    if ("tarjeta" === id) {
         document.getElementById("numerotarjeta").disabled = false;
         document.getElementById("codigotarjeta").disabled = false;
         document.getElementById("fechavencimiento").disabled = false;
@@ -126,7 +150,7 @@ function rellenarModal(id) {
 
         document.getElementById("formaPago").innerHTML = "Tarjeta de crèdito";
 
-    } else if ("formapago2" === id) {
+    } else if ("transBancaria" === id) {
         document.getElementById("numerotarjeta").disabled = true;
         document.getElementById("codigotarjeta").disabled = true;
         document.getElementById("fechavencimiento").disabled = true;
@@ -280,7 +304,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById("fechavencimiento").disabled = true;
 
     document.getElementById("numerocuenta").disabled = true;
-    let radiodepagos = document.getElementsByName("formapagomodal");
+    let radiodepagos = document.getElementsByName("formapagoelegida");
     for (let i = 0; i < radiodepagos.length; i++) {
         radiodepagos[i].addEventListener("click", function (e) {
             rellenarModal(radiodepagos[i].value);
@@ -296,6 +320,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
         if (!val) {
             e.preventDefault();
         }
-
     })
+   
+        mensajePostCompra(true);
+        $('#modalchico').modal('show');
+    
 });

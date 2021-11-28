@@ -29,6 +29,7 @@ function rellenarForumlario() {
             document.getElementById("edad").value = usuario.edad;
             document.getElementById("telefono").value = usuario.telefono;
             document.getElementById("imgpreview").src = localStorage.getItem("imgusr");
+            document.getElementById("img").required = false;
         }
     }
 }

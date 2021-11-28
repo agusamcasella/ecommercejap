@@ -69,6 +69,6 @@ function rellenarForumlario() {
                 localStorage.setItem("email", email);
 
                 localStorage.setItem("usuario", JSON.stringify(usuario));
-                //location.reload();
+                location.reload();
             });
         });

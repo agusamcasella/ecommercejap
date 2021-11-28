@@ -104,6 +104,8 @@
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">Subtotal($)</h5>
                 <p id="subtotalform"></p>
+                <input type="hidden" id="hiddensubtotal" name="subtotal" form="formulario" value="0">
+
               </div>
               <small>Sumatoria de subtotales de productos</small>
             </div>
@@ -111,6 +113,8 @@
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">Costo de envìo</h5>
                 <p id="costoenvioform"></p>
+                <input type="hidden" id="hiddenenvio" name="costoenvio" form="formulario" value="0">
+
               </div>
               <small>Segùn el tipo de envìo</small><small id="tipoenvioform"> - Standard</small>
             </div>
@@ -148,19 +152,19 @@
                       <label for="numerotarjeta">Nùmero de tarjeta</label>
                       <span id="errorNumeroTarjeta" style="color: red;"> </span>
 
-                      <input type="number" class="form-control" id="numerotarjeta">
+                      <input type="number" class="form-control" id="numerotarjeta" name="nrotarjeta">
                     </div>
                     <div class="form-group col-md-6">
                       <label for="codigotarjeta">Còdigo de seg.</label>
                       <span id="errorCodigoTarjeta" style="color: red;"> </span>
 
-                      <input type="number" class="form-control" max="999" min=0 id="codigotarjeta">
+                      <input type="number" class="form-control" max="999" min=0 id="codigotarjeta" name="codseguridad">
                     </div>
                     <div class="form-group col-md-6">
                       <label for="fechavencimiento">Vencimiento:</label>
                       <span id="errorFecha" style="color: red;"> </span>
 
-                      <input type="date" class="form-control" id="fechavencimiento">
+                      <input type="date" class="form-control" id="fechavencimiento" name="vencimiento">
                     </div>
                   </div>
                   <div class="form-row">
@@ -173,7 +177,7 @@
                       <br>
                       <label for="numerocuenta">Nùmero de cuenta</label>
                       <span id="errorNumCuenta" style="color: red;"> </span>
-                      <input type="number" class="form-control" id="numerocuenta">
+                      <input type="number" class="form-control" id="numerocuenta" name="nrocuenta">
 
                     </div>
                   </div>
@@ -190,29 +194,9 @@
           <hr>
           <input type="submit" class="btn btn-primary" value="Comprar">
           <span id="errorTotal" style="color: red;"> </span>
+          <div id="mensajeCompra"></div>
 
       </form>
-
-      <!-- Small modal
-      <div id="modalchico" class="modal fade" tabindex="-1" role="dialog"
-        aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header ">
-              <h5 class="modal-title">Estado de compra</h5>
-              <br>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-md-6">
-                  <div id="mensajeCompra">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
       
     </div>
   </main>

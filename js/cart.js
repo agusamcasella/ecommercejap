@@ -1,6 +1,5 @@
 let articulos = {};
 let porcentajeenvio = 5;
-let mensajeExito = "1";
 function convertirMoneda(moneda) {
     if (moneda === "USD") {
         return "U$S";
@@ -8,27 +7,17 @@ function convertirMoneda(moneda) {
         return "$";
     }
 }
+function mensajePostCompra(e) {
+    getJSONData(CART_BUY_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            e.target.submit();
+            alert(resultObj.data.msg);
+        } else {
+            alert(resultObj.status);
+        }
 
-// function mensajePostCompra(status) {
-//     let htmlMensaje = "";
-//     if (status) {
-//         // mensajeexito
-//         htmlMensaje = `
-//         <div class="alert alert-success" role="alert">
-//             ${mensajeExito}
-//         </div>
-//         `
-//     } else {
-//         // fail
-//         htmlMensaje = `
-//         <div class="alert alert-danger" role="alert">
-//             Su compra no se ha podido concretar!
-//             Vuelva a intentarlo màs tarde :)
-//         </div>
-//         `
-//     }
-//     document.getElementById("mensajeCompra").innerHTML = htmlMensaje;
-// }
+    })
+}
 
 function quitarElemento(id) {
     articulos.splice(id, 1);
@@ -112,6 +101,8 @@ function calcularSubtotalForm() {
         subform += parseInt(asumar);
     }
     document.getElementById("subtotalform").innerHTML = subform.toFixed(2);
+    document.getElementById("hiddensubtotal").value = subform.toFixed(2);
+
 }
 
 
@@ -124,6 +115,8 @@ function calcularTotalyEnvio() {
     document.getElementById("costoenvioform").innerHTML = envio.toFixed(2);
     document.getElementById("totalform").innerHTML = total.toFixed(2);
     document.getElementById("hiddentotal").value = total.toFixed(2);
+    document.getElementById("hiddenenvio").value = envio.toFixed(2);
+
 }
 
 function agregarDetalleEnvio() {
@@ -273,12 +266,12 @@ function validarCamposFormulario() {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
+  
 
     getJSONData(CART_DESAFIATE_URL).then(function (resultObj) {
 
         if (resultObj.status === "ok") {
             articulos = resultObj.data.articles;
-            console.log(articulos);
             rellenarTabla();
             calcularSubtotalForm();
             calcularTotalyEnvio();
@@ -302,7 +295,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById("numerotarjeta").disabled = true;
     document.getElementById("codigotarjeta").disabled = true;
     document.getElementById("fechavencimiento").disabled = true;
-
     document.getElementById("numerocuenta").disabled = true;
     let radiodepagos = document.getElementsByName("formapagoelegida");
     for (let i = 0; i < radiodepagos.length; i++) {
@@ -311,16 +303,23 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         });
     }
+    
+
     document.getElementById("close").addEventListener("click", function (e) {
         validarFormapago();
     })
     document.getElementById("formulario").addEventListener("submit", function (e) {
-        //e.preventDefault();
         let val = validarCamposFormulario();
         if (!val) {
             e.preventDefault();
+
+        } else {
+            e.preventDefault();
+            postMensaje = mensajePostCompra(e);
+
         }
+
     })
-      
-    
+
+
 });

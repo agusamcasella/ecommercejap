@@ -44,7 +44,7 @@ function rellenarForumlario() {
                     let src = URL.createObjectURL(document.getElementById("img").files[0]);
                     imgusr = document.getElementById("imgpreview");
                     imgusr.src = src;
-                    imgusr.style.width = "200px";
+                    imgusr.style.width = "150px";
                     imgusr.style.display ="block";
                 }
             })
